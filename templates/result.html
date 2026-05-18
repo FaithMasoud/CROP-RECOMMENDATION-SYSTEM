@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if error %}
+        Error — CropAdvisor
+    {% else %}
+        {{ crop | title }} Recommended — CropAdvisor
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ================================
+     ERROR STATE
+     Shown when validation fails
+     ================================ -->
+{% if error %}
+<section class="result-section">
+    <div class="result-container error-container">
+
+        <div class="result-icon">X</div>
+        <h2 class="result-title error-title">Something Went Wrong</h2>
+
+        <ul class="error-list">
+            {% for message in error_messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="/" class="btn-back">
+            Try Again
+        </a>
+    </div>
+</section>
+
+<!-- ================================
+     SUCCESS STATE
+     Shown when prediction succeeds
+     ================================ -->
+{% else %}
+<section class="result-section">
+    <div class="result-container success-container">
+
+        <!-- CROP RESULT CARD -->
+        <div class="crop-result-card">
+            <p class="result-label">Recommended Crop</p>
+            <div class="crop-emoji">{{ crop_details.emoji }}</div>
+            <h1 class="crop-name">{{ crop | title }}</h1>
+
+            <!-- Confidence bar -->
+            <div class="confidence-section">
+                <p class="confidence-label">
+                    Model Confidence: <strong>{{ confidence }}%</strong>
+                </p>
+                <div class="confidence-bar-bg">
+                    <div class="confidence-bar-fill"
+                         style="width: {{ confidence }}%">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CROP DETAILS CARD -->
+        <div class="details-grid">
+            <div class="detail-card">
+                <span class="detail-icon">📅</span>
+                <p class="detail-label">Best Season</p>
+                <p class="detail-value">{{ crop_details.season }}</p>
+            </div>
+            <div class="detail-card">
+                <span class="detail-icon">💧</span>
+                <p class="detail-label">Water Needs</p>
+                <p class="detail-value">{{ crop_details.water }}</p>
+            </div>
+            <div class="detail-card">
+                <span class="detail-icon">🎯</span>
+                <p class="detail-label">Confidence</p>
+                <p class="detail-value">{{ confidence }}%</p>
+            </div>
+        </div>
+
+        <!-- YOUR INPUT SUMMARY -->
+        <div class="input-summary">
+            <h3>Your Field Conditions</h3>
+            <div class="input-grid">
+                {% for key, value in user_inputs.items() %}
+                <div class="input-item">
+                    <span class="input-key">{{ key }}</span>
+                    <span class="input-val">{{ value }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="result-actions">
+            <a href="/" class="btn-back">
+                Try Another Prediction
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

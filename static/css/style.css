@@ -1,0 +1,537 @@
+/* ============================================
+   CROP RECOMMENDATION SYSTEM
+   static/css/style.css
+   ============================================ */
+
+/* --- ROOT VARIABLES ---
+   Define colors once, use everywhere.
+   To change the theme, just edit these values */
+:root {
+    --primary-color: #2d6a4f;      /* dark green */
+    --secondary-color: #52b788;    /* medium green */
+    --accent-color: #95d5b2;       /* light green */
+    --background: #f8f9fa;         /* light grey background */
+    --white: #ffffff;
+    --text-dark: #1b1b1b;
+    --text-light: #6c757d;
+    --border-color: #dee2e6;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+}
+
+/* --- RESET & BASE STYLES ---
+   Remove default browser styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /* padding doesn't add to element width */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+    color: var(--text-dark);
+    line-height: 1.6;        /* space between lines of text */
+}
+
+/* ============================================
+   NAVIGATION BAR
+   ============================================ */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem 0;
+    position: sticky;        /* stays at top when scrolling */
+    top: 0;
+    z-index: 100;            /* sits above other elements */
+    box-shadow: var(--shadow);
+}
+
+.nav-container {
+    max-width: 1200px;       /* limits width on large screens */
+    margin: 0 auto;          /* centers the container */
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;  /* logo left, links right */
+    align-items: center;
+}
+
+.nav-brand {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;               /* space between nav items */
+}
+
+.nav-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;  /* smooth color change on hover */
+}
+
+.nav-links a:hover {
+    color: var(--white);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--secondary-color)
+    );
+    color: var(--white);
+    text-align: center;
+    padding: 5rem 2rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Primary Button */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--white);
+    color: var(--primary-color);
+    padding: 0.9rem 2rem;
+    border-radius: 50px;     /* pill shape */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);    /* slight lift on hover */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   HOW IT WORKS SECTION
+   ============================================ */
+.how-it-works {
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.how-it-works h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 2.5rem;
+}
+
+/* 3-column grid for steps */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+    gap: 2rem;
+}
+
+.step-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);    /* lift on hover */
+}
+
+.step-number {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;             /* circle */
+    line-height: 40px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.step-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   PREDICTION FORM SECTION
+   ============================================ */
+.predict-section {
+    background: var(--white);
+    padding: 4rem 2rem;
+}
+
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--background);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.form-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.form-subtitle {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+/* Section title within form */
+.form-group-title {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin: 1.5rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+/* Row of input fields */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 inputs per row */
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Individual input group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.form-group input {
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background: var(--white);
+}
+
+.form-group input:focus {
+    outline: none;                      /* remove default blue outline */
+    border-color: var(--secondary-color);  /* green border when active */
+}
+
+/* Small hint text below input */
+.input-hint {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+/* Submit button */
+.form-submit {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-predict {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-predict:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   Makes layout work on smaller screens
+   ============================================ */
+@media (max-width: 768px) {
+    /* Stack form columns on mobile */
+    .form-row {
+        grid-template-columns: 1fr;  /* single column */
+    }
+
+    /* Stack step cards on mobile */
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Smaller hero text on mobile */
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
+/* ============================================
+   RESULT PAGE STYLES
+   ============================================ */
+.result-section {
+    padding: 3rem 2rem;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-container {
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 3rem;
+    text-align: center;
+}
+
+/* --- SUCCESS STATE --- */
+.crop-result-card {
+    margin-bottom: 2rem;
+}
+
+.result-label {
+    color: var(--text-light);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.crop-emoji {
+    font-size: 5rem;
+    margin: 1rem 0;
+}
+
+.crop-name {
+    font-size: 3rem;
+    color: var(--primary-color);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+/* Confidence bar */
+.confidence-section {
+    margin-top: 1rem;
+}
+
+.confidence-label {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.confidence-bar-bg {
+    background: var(--border-color);
+    border-radius: 50px;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.confidence-bar-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--secondary-color),
+        var(--primary-color)
+    );
+    border-radius: 50px;
+    transition: width 1s ease;
+}
+
+/* --- DETAILS GRID --- */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.detail-card {
+    background: var(--background);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    border: 1px solid var(--border-color);
+}
+
+.detail-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.detail-label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-top: 0.3rem;
+}
+
+/* --- INPUT SUMMARY --- */
+.input-summary {
+    background: var(--background);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.input-summary h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+}
+
+.input-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.input-key {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.input-val {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+/* --- BUTTONS --- */
+.btn-back {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.9rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-back:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* --- ERROR STATE --- */
+.error-container {
+    border-top: 5px solid #e74c3c;
+}
+
+.result-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.error-title {
+    color: #e74c3c;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.error-list {
+    list-style: none;
+    margin: 1.5rem 0;
+    text-align: left;
+    background: #fdf0f0;
+    padding: 1.2rem 1.5rem;
+    border-radius: 8px;
+}
+
+.error-list li {
+    color: #e74c3c;
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+}
+
+.error-list li::before {
+    content: "! ";
+    font-weight: bold;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .crop-name {
+        font-size: 2rem;
+    }
+}
