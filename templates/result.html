@@ -1,104 +1,106 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {% if error %}
-        Error — CropAdvisor
-    {% else %}
-        {{ crop | title }} Recommended — CropAdvisor
+    {% if error %}Error - CropAdvisor
+    {% else %}{{ crop | title }} Recommended - CropAdvisor
     {% endif %}
 {% endblock %}
 
 {% block content %}
 
-<!-- ================================
-     ERROR STATE
-     Shown when validation fails
-     ================================ -->
 {% if error %}
+<!-- ERROR STATE -->
 <section class="result-section">
-    <div class="result-container error-container">
-
-        <div class="result-icon">X</div>
-        <h2 class="result-title error-title">Something Went Wrong</h2>
-
-        <ul class="error-list">
-            {% for message in error_messages %}
+    <div class="result-container">
+        <div class="result-error-header">
+            <span class="error-icon-big">⚠️</span>
+            <h2 class="error-title-big">Invalid Input Detected</h2>
+        </div>
+        <div class="error-body">
+            <ul class="error-list-styled">
+                {% for message in error_messages %}
                 <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-
-        <a href="/" class="btn-back">
-            Try Again
-        </a>
+                {% endfor %}
+            </ul>
+            <div class="result-actions">
+                <a href="/" class="btn-try-again">Try Again</a>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- ================================
-     SUCCESS STATE
-     Shown when prediction succeeds
-     ================================ -->
 {% else %}
+<!-- SUCCESS STATE -->
 <section class="result-section">
-    <div class="result-container success-container">
+    <div class="result-container">
 
-        <!-- CROP RESULT CARD -->
-        <div class="crop-result-card">
-            <p class="result-label">Recommended Crop</p>
-            <div class="crop-emoji">{{ crop_details.emoji }}</div>
-            <h1 class="crop-name">{{ crop | title }}</h1>
+        <!-- Header with crop result -->
+        <div class="result-success-header">
+            <span class="result-label-top">AI Recommendation</span>
+            <span class="result-crop-emoji">
+                {{ crop_details.emoji }}
+            </span>
+            <h1 class="result-crop-name">{{ crop | title }}</h1>
 
-            <!-- Confidence bar -->
-            <div class="confidence-section">
-                <p class="confidence-label">
+            <div class="confidence-wrap">
+                <p class="confidence-text">
                     Model Confidence: <strong>{{ confidence }}%</strong>
                 </p>
-                <div class="confidence-bar-bg">
-                    <div class="confidence-bar-fill"
+                <div class="conf-bar-bg">
+                    <div class="conf-bar-fill"
                          style="width: {{ confidence }}%">
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- CROP DETAILS CARD -->
-        <div class="details-grid">
-            <div class="detail-card">
-                <span class="detail-icon">📅</span>
-                <p class="detail-label">Best Season</p>
-                <p class="detail-value">{{ crop_details.season }}</p>
-            </div>
-            <div class="detail-card">
-                <span class="detail-icon">💧</span>
-                <p class="detail-label">Water Needs</p>
-                <p class="detail-value">{{ crop_details.water }}</p>
-            </div>
-            <div class="detail-card">
-                <span class="detail-icon">🎯</span>
-                <p class="detail-label">Confidence</p>
-                <p class="detail-value">{{ confidence }}%</p>
-            </div>
-        </div>
+        <!-- Result body -->
+        <div class="result-body">
 
-        <!-- YOUR INPUT SUMMARY -->
-        <div class="input-summary">
-            <h3>Your Field Conditions</h3>
-            <div class="input-grid">
-                {% for key, value in user_inputs.items() %}
-                <div class="input-item">
-                    <span class="input-key">{{ key }}</span>
-                    <span class="input-val">{{ value }}</span>
+            <!-- Detail cards -->
+            <div class="result-details-grid">
+                <div class="result-detail-card">
+                    <span class="r-detail-icon">📅</span>
+                    <p class="r-detail-label">Best Season</p>
+                    <p class="r-detail-value">
+                        {{ crop_details.season }}
+                    </p>
                 </div>
-                {% endfor %}
+                <div class="result-detail-card">
+                    <span class="r-detail-icon">💧</span>
+                    <p class="r-detail-label">Water Needs</p>
+                    <p class="r-detail-value">
+                        {{ crop_details.water }}
+                    </p>
+                </div>
+                <div class="result-detail-card">
+                    <span class="r-detail-icon">🎯</span>
+                    <p class="r-detail-label">Accuracy</p>
+                    <p class="r-detail-value">{{ confidence }}%</p>
+                </div>
             </div>
-        </div>
 
-        <!-- ACTION BUTTONS -->
-        <div class="result-actions">
-            <a href="/" class="btn-back">
-                Try Another Prediction
-            </a>
-        </div>
+            <!-- Input summary -->
+            <div class="result-summary">
+                <h3>Your Field Conditions</h3>
+                <div class="summary-grid">
+                    {% for key, value in user_inputs.items() %}
+                    <div class="summary-item">
+                        <span class="s-key">{{ key }}</span>
+                        <span class="s-val">{{ value }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
 
+            <!-- Actions -->
+            <div class="result-actions">
+                <a href="/" class="btn-try-again">
+                    Try Another Prediction
+                </a>
+            </div>
+
+        </div>
     </div>
 </section>
 {% endif %}

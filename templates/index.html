@@ -1,149 +1,369 @@
 {% extends 'base.html' %}
 
-{% block title %}CropAdvisor — Smart Crop Recommendations{% endblock %}
+{% block title %}CropAdvisor - Smart Crop Recommendations{% endblock %}
 
 {% block content %}
 
+<!-- ================================
+     HERO SECTION
+     ================================ -->
 <section class="hero">
+    <div class="hero-background"></div>
     <div class="hero-content">
-        <h1>Smart Crop Advisor</h1>
+        <div class="hero-badge">AI Powered Agriculture</div>
+        <h1 class="hero-title">
+            Grow the <span class="hero-highlight">Right Crop</span>
+            <br>Every Season
+        </h1>
         <p class="hero-subtitle">
-            Enter your soil and weather conditions to get
-            an AI-powered crop recommendation instantly.
+            Enter your soil and weather data to get an instant
+            AI-powered crop recommendation backed by machine learning.
         </p>
-        <a href="#predict" class="btn-primary">
-            Get Recommendation
-        </a>
+        <div class="hero-buttons">
+            <a href="#predict" class="btn-primary">
+                Get Recommendation
+            </a>
+            <a href="#how-it-works" class="btn-secondary">
+                Learn More
+            </a>
+        </div>
+
+        <!-- Hero stats -->
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">22</span>
+                <span class="stat-label">Crops</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-number">99%</span>
+                <span class="stat-label">Accuracy</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-number">2200</span>
+                <span class="stat-label">Data Points</span>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="how-it-works">
-    <h2>How It Works</h2>
-    <div class="steps-grid">
-        <div class="step-card">
-            <span class="step-number">1</span>
-            <h3>Enter Soil Data</h3>
-            <p>Input your nitrogen, phosphorus, potassium and pH levels.</p>
+<!-- ================================
+     HOW IT WORKS SECTION
+     ================================ -->
+<section class="how-it-works" id="how-it-works">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-badge">Simple Process</span>
+            <h2>How CropAdvisor Works</h2>
+            <p>Three simple steps to get your personalized crop recommendation</p>
         </div>
-        <div class="step-card">
-            <span class="step-number">2</span>
-            <h3>Add Weather Info</h3>
-            <p>Provide temperature, humidity and rainfall data.</p>
-        </div>
-        <div class="step-card">
-            <span class="step-number">3</span>
-            <h3>Get Recommendation</h3>
-            <p>Our AI model instantly recommends the best crop for you.</p>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    <span class="step-icon">🧪</span>
+                </div>
+                <span class="step-number">Step 1</span>
+                <h3>Test Your Soil</h3>
+                <p>
+                    Measure your soil's nitrogen, phosphorus,
+                    potassium levels and pH value using a soil
+                    testing kit.
+                </p>
+            </div>
+
+            <div class="step-connector">→</div>
+
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    <span class="step-icon">🌤️</span>
+                </div>
+                <span class="step-number">Step 2</span>
+                <h3>Add Weather Data</h3>
+                <p>
+                    Record your local temperature, humidity
+                    and average rainfall from a weather station
+                    or local records.
+                </p>
+            </div>
+
+            <div class="step-connector">→</div>
+
+            <div class="step-card">
+                <div class="step-icon-wrap">
+                    <span class="step-icon">🤖</span>
+                </div>
+                <span class="step-number">Step 3</span>
+                <h3>Get AI Recommendation</h3>
+                <p>
+                    Our Random Forest model analyzes your data
+                    and instantly recommends the best crop
+                    for your conditions.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
+<!-- ================================
+     PREDICTION FORM SECTION
+     ================================ -->
 <section class="predict-section" id="predict">
-    <div class="form-container">
-        <h2>Enter Your Field Conditions</h2>
-        <p class="form-subtitle">
-            Fill in all fields for the most accurate recommendation.
-        </p>
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-badge">AI Analysis</span>
+            <h2>Enter Your Field Conditions</h2>
+            <p>Fill in all 7 measurements for the most accurate recommendation</p>
+        </div>
 
-        <form id="prediction-form" action="/predict" method="POST">
+        <div class="form-card">
+            <form id="prediction-form" action="/predict" method="POST"
+                  novalidate>
 
-            <div class="form-group-title">Soil Nutrients</div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nitrogen">Nitrogen (N)</label>
-                    <input type="number"
-                           id="nitrogen"
-                           name="nitrogen"
-                           placeholder="e.g. 90"
-                           min="0" max="140"
-                           required>
-                    <span class="input-hint">Range: 0 - 140</span>
+                <!-- SOIL NUTRIENTS -->
+                <div class="form-section">
+                    <div class="form-section-header">
+                        <span class="form-section-icon">🌱</span>
+                        <div>
+                            <h3>Soil Nutrients</h3>
+                            <p>NPK values from your soil test report</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nitrogen">
+                                Nitrogen (N)
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number"
+                                       id="nitrogen"
+                                       name="nitrogen"
+                                       placeholder="0 - 140"
+                                       min="0" max="140"
+                                       step="1"
+                                       required>
+                                <span class="input-unit">kg/ha</span>
+                            </div>
+                            <span class="input-hint">
+                                Promotes leafy growth
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phosphorus">
+                                Phosphorus (P)
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number"
+                                       id="phosphorus"
+                                       name="phosphorus"
+                                       placeholder="0 - 145"
+                                       min="0" max="145"
+                                       step="1"
+                                       required>
+                                <span class="input-unit">kg/ha</span>
+                            </div>
+                            <span class="input-hint">
+                                Supports root development
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="potassium">
+                                Potassium (K)
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number"
+                                       id="potassium"
+                                       name="potassium"
+                                       placeholder="0 - 205"
+                                       min="0" max="205"
+                                       step="1"
+                                       required>
+                                <span class="input-unit">kg/ha</span>
+                            </div>
+                            <span class="input-hint">
+                                Improves fruit quality
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="phosphorus">Phosphorus (P)</label>
-                    <input type="number"
-                           id="phosphorus"
-                           name="phosphorus"
-                           placeholder="e.g. 42"
-                           min="0" max="145"
-                           required>
-                    <span class="input-hint">Range: 0 - 145</span>
+                <!-- WEATHER CONDITIONS -->
+                <div class="form-section">
+                    <div class="form-section-header">
+                        <span class="form-section-icon">🌤️</span>
+                        <div>
+                            <h3>Weather Conditions</h3>
+                            <p>Local climate measurements for your region</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="temperature">
+                                Temperature
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number"
+                                       id="temperature"
+                                       name="temperature"
+                                       placeholder="0 - 50"
+                                       min="0" max="50"
+                                       step="0.01"
+                                       required>
+                                <span class="input-unit">°C</span>
+                            </div>
+                            <span class="input-hint">
+                                Average temperature
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="humidity">
+                                Humidity
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number"
+                                       id="humidity"
+                                       name="humidity"
+                                       placeholder="0 - 100"
+                                       min="0" max="100"
+                                       step="0.01"
+                                       required>
+                                <span class="input-unit">%</span>
+                            </div>
+                            <span class="input-hint">
+                                Relative humidity
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rainfall">
+                                Rainfall
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number"
+                                       id="rainfall"
+                                       name="rainfall"
+                                       placeholder="0 - 300"
+                                       min="0" max="300"
+                                       step="0.01"
+                                       required>
+                                <span class="input-unit">mm</span>
+                            </div>
+                            <span class="input-hint">
+                                Average rainfall
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="potassium">Potassium (K)</label>
-                    <input type="number"
-                           id="potassium"
-                           name="potassium"
-                           placeholder="e.g. 43"
-                           min="0" max="205"
-                           required>
-                    <span class="input-hint">Range: 0 - 205</span>
+                <!-- SOIL CHEMISTRY -->
+                <div class="form-section">
+                    <div class="form-section-header">
+                        <span class="form-section-icon">⚗️</span>
+                        <div>
+                            <h3>Soil Chemistry</h3>
+                            <p>Acidity level of your soil</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group form-group-wide">
+                            <label for="ph">
+                                Soil pH Level
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="number"
+                                       id="ph"
+                                       name="ph"
+                                       placeholder="0 - 14"
+                                       min="0" max="14"
+                                       step="0.01"
+                                       required>
+                                <span class="input-unit">pH</span>
+                            </div>
+                            <span class="input-hint">
+                                Acidic (0-6) | Neutral (7) | Alkaline (8-14)
+                            </span>
+
+                            <!-- pH visual scale -->
+                            <div class="ph-scale">
+                                <span class="ph-acid">Acidic</span>
+                                <div class="ph-bar"></div>
+                                <span class="ph-neutral">Neutral</span>
+                                <div class="ph-bar-2"></div>
+                                <span class="ph-alkaline">Alkaline</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group-title">Weather Conditions</div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="temperature">Temperature (C)</label>
-                    <input type="number"
-                           id="temperature"
-                           name="temperature"
-                           placeholder="e.g. 25.5"
-                           step="0.01"
-                           min="0" max="50"
-                           required>
-                    <span class="input-hint">Range: 0 - 50</span>
+                <!-- SUBMIT -->
+                <div class="form-submit-section">
+                    <div class="submit-info">
+                        <span class="required">*</span> All fields are required
+                    </div>
+                    <button type="submit"
+                            class="btn-predict"
+                            id="submitBtn">
+                        <span class="btn-text">
+                            Get Crop Recommendation
+                        </span>
+                        <span class="btn-icon">→</span>
+                    </button>
                 </div>
 
-                <div class="form-group">
-                    <label for="humidity">Humidity (%)</label>
-                    <input type="number"
-                           id="humidity"
-                           name="humidity"
-                           placeholder="e.g. 80.5"
-                           step="0.01"
-                           min="0" max="100"
-                           required>
-                    <span class="input-hint">Range: 0 - 100</span>
-                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-                <div class="form-group">
-                    <label for="rainfall">Rainfall (mm)</label>
-                    <input type="number"
-                           id="rainfall"
-                           name="rainfall"
-                           placeholder="e.g. 200.5"
-                           step="0.01"
-                           min="0" max="300"
-                           required>
-                    <span class="input-hint">Range: 0 - 300</span>
-                </div>
-            </div>
+<!-- ================================
+     CROPS PREVIEW SECTION
+     ================================ -->
+<section class="crops-section">
+    <div class="section-container">
+        <div class="section-header">
+            <span class="section-badge">Our Database</span>
+            <h2>Crops We Can Recommend</h2>
+            <p>Our model is trained on 22 different crop varieties</p>
+        </div>
 
-            <div class="form-group-title">Soil Chemistry</div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="ph">Soil pH</label>
-                    <input type="number"
-                           id="ph"
-                           name="ph"
-                           placeholder="e.g. 6.5"
-                           step="0.01"
-                           min="0" max="14"
-                           required>
-                    <span class="input-hint">Range: 0 - 14</span>
-                </div>
-            </div>
-
-            <div class="form-submit">
-                <button type="submit" class="btn-predict">
-                    Get Crop Recommendation
-                </button>
-            </div>
-
-        </form>
+        <div class="crops-grid">
+            <div class="crop-chip">🌾 Rice</div>
+            <div class="crop-chip">🌽 Maize</div>
+            <div class="crop-chip">🫘 Chickpea</div>
+            <div class="crop-chip">🫘 Kidney Beans</div>
+            <div class="crop-chip">🫘 Pigeon Peas</div>
+            <div class="crop-chip">🫘 Moth Beans</div>
+            <div class="crop-chip">🫘 Mung Bean</div>
+            <div class="crop-chip">🫘 Black Gram</div>
+            <div class="crop-chip">🫘 Lentil</div>
+            <div class="crop-chip">🍎 Pomegranate</div>
+            <div class="crop-chip">🍌 Banana</div>
+            <div class="crop-chip">🥭 Mango</div>
+            <div class="crop-chip">🍇 Grapes</div>
+            <div class="crop-chip">🍉 Watermelon</div>
+            <div class="crop-chip">🍈 Muskmelon</div>
+            <div class="crop-chip">🍎 Apple</div>
+            <div class="crop-chip">🍊 Orange</div>
+            <div class="crop-chip">🍈 Papaya</div>
+            <div class="crop-chip">🥥 Coconut</div>
+            <div class="crop-chip">🌿 Cotton</div>
+            <div class="crop-chip">🌿 Jute</div>
+            <div class="crop-chip">☕ Coffee</div>
+        </div>
     </div>
 </section>
 

@@ -1,30 +1,52 @@
 // ============================================
-// CROP RECOMMENDATION SYSTEM
-// static/js/main.js
+// CROPADVISOR — main.js
 // ============================================
 
-// This runs when the entire page has loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('CropAdvisor app loaded successfully!');
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Smooth scrolling for anchor links (e.g. href="#predict")
-    // When user clicks "Get Recommendation →" it scrolls smoothly
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-
-    anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();     // stop instant jump
-
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                // Smooth scroll to the section
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+    // --- Smooth scrolling ---
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(
+                this.getAttribute('href')
+            );
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth', block: 'start'
                 });
             }
         });
     });
+
+    // --- Mobile menu toggle ---
+    const mobileBtn  = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', function () {
+            mobileMenu.classList.toggle('open');
+        });
+    }
+
+    // --- Animate confidence bar on result page ---
+    const confBar = document.querySelector('.conf-bar-fill');
+    if (confBar) {
+        const targetWidth = confBar.style.width;
+        confBar.style.width = '0%';
+        setTimeout(() => {
+            confBar.style.width = targetWidth;
+        }, 300);
+    }
+
+    // --- Navbar active link highlight ---
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.style.background = 'rgba(255,255,255,0.15)';
+            link.style.color = '#ffffff';
+        }
+    });
+
+    console.log('CropAdvisor loaded successfully!');
 });
